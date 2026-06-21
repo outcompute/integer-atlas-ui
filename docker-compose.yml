@@ -1,0 +1,33 @@
+services:
+  hub:
+    build: ./images/hub
+    image: integer-atlas-hub
+    container_name: integer-atlas-hub
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock   # spawn single-user containers
+      - ./jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py:ro
+      - hub-data:/data
+    environment:
+      INTEGER_ATLAS_HOME: ${INTEGER_ATLAS_HOME:-/data/integer-atlas}
+      SINGLEUSER_IMAGE: integer-atlas-singleuser
+      DOCKER_NETWORK_NAME: ui_default
+      HUB_CONNECT_IP: hub
+      JUPYTERHUB_ADMIN: ${JUPYTERHUB_ADMIN:-admin}
+      # Optional live-edit mount of your notebooks (absolute host path). Unset by
+      # default → the image's baked-in notebooks are used.
+      NOTEBOOKS_DIR: ${NOTEBOOKS_DIR:-}
+
+  # Build-only: the single-user image the hub spawns. Never started directly.
+  #   docker compose --profile build build
+  singleuser:
+    build:
+      context: .
+      dockerfile: images/singleuser/Dockerfile
+    image: integer-atlas-singleuser
+    profiles: ["build"]
+
+volumes:
+  hub-data:
