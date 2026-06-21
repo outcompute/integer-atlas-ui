@@ -58,3 +58,7 @@ to `NativeAuthenticator` (self-signup) or OAuth (GitHub/Google) in `jupyterhub_c
 Add a BI service (Metabase is light; Superset is richer but drags Postgres + Redis) for
 point-and-click dashboards, and put everything behind a reverse proxy + `oauth2-proxy`
 for single team sign-on. Both consume the same read-only DuckDB/parquet.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
