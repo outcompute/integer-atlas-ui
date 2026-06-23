@@ -59,6 +59,6 @@ Add a BI service (Metabase is light; Superset is richer but drags Postgres + Red
 point-and-click dashboards, and put everything behind a reverse proxy + `oauth2-proxy`
 for single team sign-on. Both consume the same read-only DuckDB/parquet.
 
-## License
+## License & citation
 
-MIT — see [LICENSE](LICENSE).
+Code: MIT — see [LICENSE](LICENSE). If you use Integer Atlas, please cite it — see [CITATION.cff](CITATION.cff).
