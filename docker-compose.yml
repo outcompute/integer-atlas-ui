@@ -1,3 +1,7 @@
+# Pin the project name so the Compose network is always "ui_default" regardless of
+# the checkout directory — the spawner (DOCKER_NETWORK_NAME) depends on this.
+name: ui
+
 services:
   hub:
     build: ./images/hub
